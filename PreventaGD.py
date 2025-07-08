@@ -9,10 +9,10 @@ from io import BytesIO
 sharepoint_url = "https://growdatasas.sharepoint.com"
 site_url = "/sites/Gestiondocumental"
 folder_path = "/unidades_negocio/UN_Preventa"
-file_name = "Reporte.xlsx"  # ← cambia por el nombre exacto de tu archivo
+file_name = "tareas semana del 24 al 27 de junio .xlsx"  # ← cambia por el nombre exacto de tu archivo
 
-username = "tu_correo@growdata.com.co"
-password = "tu_contraseña"
+username = "freddy.orozco@growdata.com.co"
+password = "Onagaragardo719???"
 
 # Autenticación
 ctx_auth = AuthenticationContext(sharepoint_url)
