@@ -18,17 +18,20 @@ password = "Onagaragardo719???"
 ctx_auth = AuthenticationContext(sharepoint_url)
 if ctx_auth.acquire_token_for_user(username, password):
     ctx = ClientContext(sharepoint_url + site_url, ctx_auth)
-    file_url = f"{folder_path}/{file_name}"
+    file_relative_url = site_url + folder_path + "/" + file_name
 
-    response = ctx.web.get_file_by_server_relative_url(site_url + file_url).download()
-    ctx.execute_query()
+    # Creamos un buffer en memoria
+    file_obj = BytesIO()
 
-    # Leer el archivo Excel desde memoria
-    bytes_file_obj = BytesIO()
-    bytes_file_obj.write(response.content)
-    bytes_file_obj.seek(0)
-    df = pd.read_excel(bytes_file_obj)
+    # Descargamos el archivo al buffer
+    ctx.web.get_file_by_server_relative_url(file_relative_url).download(file_obj).execute_query()
 
+    # Leemos el archivo Excel desde el buffer
+    file_obj.seek(0)
+    df = pd.read_excel(file_obj)
+
+    # Mostramos en Streamlit
+    st.title("Archivo Excel desde SharePoint")
     st.dataframe(df)
 else:
     st.error("Error de autenticación en SharePoint")
