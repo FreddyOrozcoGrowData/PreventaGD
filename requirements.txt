@@ -24,3 +24,5 @@ seaborn
 google-auth
 google-auth-oauthlib
 google-api-python-client
+openpyxl
+Office365-REST-Python-Client
